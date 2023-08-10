@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Disney+ clone</h1>
+      <h1>Disney+ clone in dev branch</h1>
     </div>
   );
 }
