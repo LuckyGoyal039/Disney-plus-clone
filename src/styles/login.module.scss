@@ -1,0 +1,79 @@
+.mainSection {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin-bottom: 10vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bgImage {
+  height: 100%;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../assets/images/login-background.jpg");
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+}
+.logoContainer {
+  max-width: 650px;
+  margin-bottom: 2vw;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.ctaLogoOne {
+  max-width: 600px;
+  min-height: 1px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.getAllThereButton {
+  background-color: #0063e5;
+  color: #f9f9f9;
+  width: 100%;
+  letter-spacing: 1.5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 16px 0;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  &:hover {
+    background-color: #0483ee;
+  }
+}
+
+.discription {
+  color: #dbd9db;
+  font-size: 11px;
+  margin: 0 0 24px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+}
+
+.ctaLogoTwo {
+  max-width: 600px;
+  margin-bottom: 20px;
+  width: 100%;
+}
