@@ -6,24 +6,23 @@ import OriginalsIcon from "../assets/images/original-icon.svg";
 import MoviesIcon from "../assets/images/movie-icon.svg";
 import SeriesIcon from "../assets/images/series-icon.svg";
 import styles from "../styles/header.module.scss";
-import { loginWithGoogle } from "../context/AuthContext";
-import React from "react";
-
+import { sighOutUser, loginWithGoogle } from "../context/AuthContext";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 import {
   setUserLoginDetails,
   selectUserName,
   selectUserPhoto,
+  setSignOutState,
 } from "../features/user/userSlice";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
-
+  const navigate = useNavigate();
   const setUser = (user) => {
     dispatch(
       setUserLoginDetails({
@@ -34,22 +33,43 @@ const Header = (props) => {
     );
   };
 
-  const handleLogin = async () => {
-    try {
-      const result = await loginWithGoogle();
-      setUser(result.user);
-    } catch (error) {
-      // alert(error.message);
-      console.log(error.message);
+  const handleUser = async () => {
+    if (!userName) {
+      try {
+        const result = await loginWithGoogle();
+        setUser(result.user);
+        console.log(result.user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else if (userName) {
+      sighOutUser()
+        .then(() => {
+          dispatch(setSignOutState());
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        navigate("/home");
+      }
+    });
+  }, [userName]);
+
   return (
     <nav className={styles.navBar}>
       <div className={styles.mainLogo}>
         <img src={Logo} alt="Logo" />
       </div>
       {!userName ? (
-        <a className={styles.loginBtn} href="/#" onClick={handleLogin}>
+        <a className={styles.loginBtn} href="/#" onClick={handleUser}>
           LOGIN
         </a>
       ) : (
@@ -88,7 +108,16 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </div>
-          <img src={userPhoto} alt="Profile" className={styles.profilePhoto}/>
+          <div className={styles.profileContainer}>
+            <img
+              src={userPhoto}
+              alt="Profile"
+              className={styles.profilePhoto}
+            />
+            <span className={styles.signOut} onClick={handleUser}>
+              Sign out
+            </span>
+          </div>
         </React.Fragment>
       )}
     </nav>
