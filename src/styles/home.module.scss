@@ -1,0 +1,11 @@
+.container {
+  background-image: url("../assets/images/home-background.png");
+  width: 100%;
+  overflow-x: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid transparent;
+  padding: 0 calc(5vw + 5px);
+  min-height: 100vh;
+}
