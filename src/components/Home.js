@@ -3,6 +3,7 @@ import Header from "./Header";
 import styles from "../styles/home.module.scss";
 import ImageSlider from "./ImageSlider";
 import Viewers from "./Viewers";
+import Recommends from "./Recommends";
 
 const Home = (props) => {
   return (
@@ -11,6 +12,10 @@ const Home = (props) => {
       <div className={styles.container}>
         <ImageSlider />
         <Viewers />
+        <Recommends heading={"Recommended for You"} />
+        <Recommends heading={"New to Disney+"} />
+        <Recommends heading={"Originals"} />
+        <Recommends heading={"Trending"} />
       </div>
     </div>
   );
