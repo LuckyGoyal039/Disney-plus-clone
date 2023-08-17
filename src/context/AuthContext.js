@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const loginWithGoogle = async () => {
   try {
@@ -15,14 +16,24 @@ const sighOutUser = () => {
   return new Promise((resolve, reject) => {
     signOut(auth)
       .then(() => {
-        console.log("signout successfully");
         resolve();
       })
       .catch((error) => {
-        console.lo00g(error);
         reject(error);
       });
   });
 };
 
-export { loginWithGoogle, sighOutUser };
+const getMovies = async () => {
+  return new Promise((resolve, reject) => {
+    getDocs(collection(db, "movies"))
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export { loginWithGoogle, sighOutUser, getMovies };
