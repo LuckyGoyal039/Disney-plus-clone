@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
-// import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDj3SMJoyRi4tOsoTvsd0uKY6SSH1rwKKE",
@@ -10,13 +10,13 @@ const firebaseConfig = {
   storageBucket: "disneyplus-clone-ae086.appspot.com",
   messagingSenderId: "269912177715",
   appId: "1:269912177715:web:8b07353a8a9d530e033746",
-  measurementId: "G-649F13R90W"
+  measurementId: "G-649F13R90W",
 };
 
 const app = initializeApp(firebaseConfig);
 
-// const db=getDatabase(app);
-const auth=getAuth(app);
-const storage=getStorage(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
+const db = getFirestore(app);
 
-export { auth, storage}; 
+export { auth, storage, db };
