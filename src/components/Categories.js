@@ -22,6 +22,8 @@ const Caterories = ({ heading, category }) => {
         return trendingMovies;
       case "new":
         return newDisneyMovies;
+      default:
+        console.log("Somthing wet wrong");
     }
   }
   return (
@@ -31,7 +33,7 @@ const Caterories = ({ heading, category }) => {
         {checkCategory()?.map((ele) => {
           return (
             <div className={styles.imageElement} key={ele.id}>
-              <Link to="/">
+              <Link to={"/detail/".concat(ele.id)}>
                 <img src={ele.cardImg} alt={ele.title} />
               </Link>
             </div>

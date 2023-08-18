@@ -38,6 +38,7 @@ const Header = (props) => {
       try {
         const result = await loginWithGoogle();
         setUser(result.user);
+        navigate('/home')
         console.log(result.user);
       } catch (error) {
         console.log(error.message);
@@ -58,9 +59,9 @@ const Header = (props) => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        navigate("/home");
       }
     });
+    //eslint-disable-next-line
   }, [userName]);
 
   return (
@@ -79,11 +80,11 @@ const Header = (props) => {
               <img src={HomeIcon} alt="Home" className={styles.menuIcons} />
               <span>HOME</span>
             </a>
-            <a href="/search">
+            <a href="/home">
               <img src={SearchIcon} alt="search" className={styles.menuIcons} />
               <span>SEARCH</span>
             </a>
-            <a href="/watchlist">
+            <a href="/home">
               <img
                 src={WatchListIcon}
                 alt="watchList"
@@ -91,7 +92,7 @@ const Header = (props) => {
               />
               <span>WATCHLIST</span>
             </a>
-            <a href="/originals">
+            <a href="/home">
               <img
                 src={OriginalsIcon}
                 alt="originals"
@@ -99,11 +100,11 @@ const Header = (props) => {
               />
               <span>ORIGINALS</span>
             </a>
-            <a href="/movies">
+            <a href="/home">
               <img src={MoviesIcon} alt="movies" className={styles.menuIcons} />
               <span>MOVIES</span>
             </a>
-            <a href="/series">
+            <a href="/home">
               <img src={SeriesIcon} alt="series" className={styles.menuIcons} />
               <span>SERIES</span>
             </a>
