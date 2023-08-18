@@ -7,15 +7,23 @@ import Categories from "./Categories";
 import { useDispatch } from "react-redux";
 import { getMovies } from "../context/AuthContext";
 import { setMovies } from "../features/movie/movieSlice";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const dataFetchRef = useRef(false);
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const recommends = [];
   const originals = [];
   const trending = [];
   const newDisney = [];
   useEffect(() => {
+    auth.onAuthStateChanged((user)=>{
+      if(!user){
+        navigate('/');
+      }
+    })
     if (dataFetchRef.current) return;
     getMovies()
       .then((res) => {
